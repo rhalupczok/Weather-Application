@@ -3,9 +3,9 @@ import Header from "./components/Header";
 import CurrentWeather from "./components/CurrentWeather";
 import Forecast from "./components/Forecast";
 import { CurrentWeatherData, ForecastWeatherData } from "./data/interfaces";
+import { apiSrc } from "./weatherApi";
 
 const App: React.FC = () => {
-    const apiKey = "aec2be107d23157731e420673782f5f3";
     const [city, setCity] = React.useState<string | null>(null);
     const [coordinates, setCoordinates] = React.useState<{
         lat: number;
@@ -20,8 +20,8 @@ const App: React.FC = () => {
     // GETDATA
     React.useEffect(() => {
         if (city) {
-            const currentWeatherSrc: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-            const forecastDataSrc: string = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+            const currentWeatherSrc: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiSrc}`;
+            const forecastDataSrc: string = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiSrc}`;
 
             fetch(currentWeatherSrc).then((response) => {
                 response.json().then((data) => {
@@ -43,8 +43,8 @@ const App: React.FC = () => {
 
     React.useEffect(() => {
         if (coordinates) {
-            const currentWeatherSrc: string = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&appid=${apiKey}`;
-            const forecastDataSrc: string = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&appid=${apiKey}`;
+            const currentWeatherSrc: string = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&appid=${apiSrc}`;
+            const forecastDataSrc: string = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&appid=${apiSrc}`;
 
             fetch(currentWeatherSrc).then((response) => {
                 response.json().then((data) => {
