@@ -1,21 +1,16 @@
-import React from "react";
-import { CurrentWeatherData } from "../data/interfaces";
+import React, { memo, useCallback, useState } from "react";
+import "../style/header.css";
+import { HeaderProps } from "../data/interfaces";
 
-interface Props {
-    weatherDataHandle: CurrentWeatherData | null;
-    getCityDataHandle: (cityName: string) => void;
-    getGPSDataHandle: () => void;
-}
-
-const Header: React.FC<Props> = React.memo(
+const Header: React.FC<HeaderProps> = memo(
     ({ weatherDataHandle, getCityDataHandle, getGPSDataHandle }) => {
-        const [cityName, setCityName] = React.useState("");
+        const [cityName, setCityName] = useState("");
 
         const onChange = (event: { target: { value: string } }) => {
             setCityName(event.target.value);
         };
 
-        const setCity = React.useCallback(() => {
+        const setCity = useCallback(() => {
             if (cityName === "") return;
             getCityDataHandle(cityName);
             setCityName("");

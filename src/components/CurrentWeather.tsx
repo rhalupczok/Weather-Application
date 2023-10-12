@@ -1,14 +1,16 @@
-import React from "react";
-import { CurrentWeatherData, MainWeatherData } from "../data/interfaces";
+import React, { useState, useEffect } from "react";
+import "../style/currentWeather.css";
+import { clockFormatter } from "../data/helper functions";
+import { CurrentWeatherProps, MainWeatherData } from "../data/interfaces";
 
-interface Props {
-    weatherDataHandle: CurrentWeatherData;
-}
-const CurrentWeather: React.FC<Props> = ({ weatherDataHandle }) => {
-    const [weatherData, setWeatherData] =
-        React.useState<MainWeatherData | null>(null);
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({
+    weatherDataHandle,
+}) => {
+    const [weatherData, setWeatherData] = useState<MainWeatherData | null>(
+        null
+    );
 
-    function sunWalk() {
+    const sunWalk: () => {} = () => {
         //sunwalk effect - func returns style of div with sun symbol - angle depends on current time
         const time: number = new Date().valueOf(); //current time
         const x: number = //percentage value of current time counted since sunrise to sunset
@@ -18,7 +20,7 @@ const CurrentWeather: React.FC<Props> = ({ weatherDataHandle }) => {
             angle: 0,
             display: "flex",
         };
-        if (0 < x && x <= 100) {
+        if (x > 0 && x <= 100) {
             //if current time is betwen sunrise and sunset (daytime) then display sun and return propper angle
             sunWalkProperties.angle = (180 * x) / 100;
             sunWalkProperties.display = "flex";
@@ -30,17 +32,9 @@ const CurrentWeather: React.FC<Props> = ({ weatherDataHandle }) => {
             transform: `rotate(${sunWalkProperties.angle}deg)`,
             display: `${sunWalkProperties.display}`,
         };
-    }
+    };
 
-    function clockFormatter(time: Date) {
-        return (
-            time.getHours() +
-            ":" +
-            (time.getMinutes() < 10 ? "0" : "") +
-            time.getMinutes()
-        );
-    }
-    React.useEffect(() => {
+    useEffect(() => {
         if (weatherDataHandle) {
             const sunRise = new Date(weatherDataHandle.sys.sunrise * 1000);
             const sunSet = new Date(weatherDataHandle.sys.sunset * 1000);

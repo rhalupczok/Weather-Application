@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h2 {
+    color: white;
+}
+
+.header--gps {
+    padding: 0 35px;
+    height: 30px;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+.header--input-loc {
+    margin-right: auto;
+    margin-left: 20px;
+    width: 100px;
+    display: flex;
+}
+.header--input-loc--input {
+    width: 80px;
+}

@@ -1,3 +1,17 @@
+export interface CurrentWeatherProps {
+    weatherDataHandle: CurrentWeatherData;
+}
+
+export interface ForecastWeatherProps {
+    forecastWeatherDataHandle: ForecastWeatherData;
+}
+
+export interface HeaderProps {
+    weatherDataHandle: CurrentWeatherData | null;
+    getCityDataHandle: (cityName: string) => void;
+    getGPSDataHandle: () => void;
+}
+
 export interface CurrentWeatherData {
     coord: {
         lon: number;

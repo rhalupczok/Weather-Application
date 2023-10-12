@@ -1,12 +1,12 @@
 import React from "react";
-import { ForecastWeatherData } from "../data/interfaces";
+import "../style/forecast.css";
+import { ForecastWeatherProps } from "../data/interfaces";
 
-interface Props {
-    forecastWeatherDataHandle: ForecastWeatherData;
-}
+const dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const Forecast: React.FC<Props> = ({ forecastWeatherDataHandle }) => {
-    const dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const Forecast: React.FC<ForecastWeatherProps> = ({
+    forecastWeatherDataHandle,
+}) => {
     const singleItem = forecastWeatherDataHandle.list.map((day) => {
         const date = new Date(
             (day.dt - forecastWeatherDataHandle.city.timezone) * 1000
